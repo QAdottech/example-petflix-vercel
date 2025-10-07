@@ -69,11 +69,13 @@ export default function VideoCard({ video, onToggleFavorite }: VideoCardProps) {
       </div>
 
       <div className="mt-3">
-        <h3 className="font-medium text-gray-900 line-clamp-2 group-hover:text-red-600 transition-colors">
+        <h3 className="font-medium text-gray-900 dark:text-gray-100 line-clamp-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
           {video.title}
         </h3>
-        <p className="text-sm text-gray-600 mt-1">{video.channel}</p>
-        <div className="flex items-center text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+          {video.channel}
+        </p>
+        <div className="flex items-center text-sm text-gray-500 dark:text-gray-500 mt-1">
           <span>{video.views} views</span>
           <span className="mx-1">•</span>
           <span>{video.uploadTime}</span>
