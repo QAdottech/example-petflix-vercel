@@ -59,16 +59,16 @@ export default function VideoPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
         <Header onSearch={handleSearch} />
         <div className="flex">
           <Sidebar />
           <main className="flex-1 p-6">
             <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-64 mb-6"></div>
-              <div className="aspect-video bg-gray-200 rounded-lg mb-6"></div>
-              <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-6"></div>
+              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg mb-6"></div>
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
             </div>
           </main>
         </div>
@@ -78,17 +78,17 @@ export default function VideoPage() {
 
   if (!video) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
         <Header onSearch={handleSearch} />
         <div className="flex">
           <Sidebar />
           <main className="flex-1 p-6">
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🐕</div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 Video Not Found
               </h1>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
                 The video you&apos;re looking for doesn&apos;t exist.
               </p>
               <Link
@@ -106,7 +106,7 @@ export default function VideoPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <Header onSearch={handleSearch} />
       <div className="flex">
         <Sidebar />
@@ -115,7 +115,7 @@ export default function VideoPage() {
             {/* Back Button */}
             <Link
               href="/"
-              className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+              className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 mb-6 transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
@@ -140,13 +140,13 @@ export default function VideoPage() {
             </div>
 
             {/* Video Information */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                     {video.title}
                   </h1>
-                  <div className="flex items-center text-sm text-gray-600 space-x-4">
+                  <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 space-x-4">
                     <div className="flex items-center">
                       <Eye className="h-4 w-4 mr-1" />
                       {video.views} views
@@ -166,7 +166,7 @@ export default function VideoPage() {
                   className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
                     favorited
                       ? 'bg-red-500 text-white hover:bg-red-600'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-slate-600'
                   }`}
                 >
                   <Heart
@@ -178,21 +178,23 @@ export default function VideoPage() {
                 </button>
               </div>
 
-              <div className="border-t pt-4">
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
                 <div className="flex items-center mb-3">
-                  <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-gray-600 font-semibold">
+                  <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-gray-600 dark:text-gray-300 font-semibold">
                       {video.channel.charAt(0)}
                     </span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">
                       {video.channel}
                     </h3>
-                    <p className="text-sm text-gray-600">Pet Video Channel</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Pet Video Channel
+                    </p>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   {video.description}
                 </p>
               </div>
@@ -200,7 +202,7 @@ export default function VideoPage() {
 
             {/* Category Badge */}
             <div className="mt-4">
-              <span className="inline-block bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+              <span className="inline-block bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm font-medium">
                 {video.category.charAt(0).toUpperCase() +
                   video.category.slice(1)}
               </span>

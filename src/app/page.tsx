@@ -61,19 +61,19 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
         <Header onSearch={handleSearch} />
         <div className="flex">
           <Sidebar />
           <main className="flex-1 p-6">
             <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-64 mb-6"></div>
+              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-6"></div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {[...Array(8)].map((_, i) => (
                   <div key={i} className="space-y-3">
-                    <div className="aspect-video bg-gray-200 rounded-lg"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                    <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
                   </div>
                 ))}
               </div>
@@ -85,16 +85,16 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <Header onSearch={handleSearch} />
       <div className="flex">
         <Sidebar />
         <main className="flex-1 p-6">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
               Welcome to PetFlix! 🐾
             </h1>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
               The ultimate destination for hilarious pet videos that will make
               your day!
             </p>
@@ -102,14 +102,14 @@ export default function HomePage() {
             {trendingVideos.length > 0 && (
               <section className="mb-12">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-semibold text-gray-900">
+                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                     🔥 Trending Now
                   </h2>
                   <button
                     onClick={() =>
                       (window.location.href = '/search?trending=true')
                     }
-                    className="text-red-600 hover:text-red-700 font-medium transition-colors"
+                    className="text-red-600 dark:text-red-500 hover:text-red-700 dark:hover:text-red-400 font-medium transition-colors"
                   >
                     View All Trending →
                   </button>
@@ -123,7 +123,7 @@ export default function HomePage() {
             )}
 
             <section className="mb-12">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">
                 Featured Videos
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -136,14 +136,14 @@ export default function HomePage() {
             {reptileVideos.length > 0 && (
               <section className="mb-12">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-semibold text-gray-900">
+                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                     Reptile Adventures 🦎
                   </h2>
                   <button
                     onClick={() =>
                       (window.location.href = '/search?category=reptiles')
                     }
-                    className="text-red-600 hover:text-red-700 font-medium transition-colors"
+                    className="text-red-600 dark:text-red-500 hover:text-red-700 dark:hover:text-red-400 font-medium transition-colors"
                   >
                     View All Reptiles →
                   </button>
@@ -158,14 +158,14 @@ export default function HomePage() {
 
             <section className="mb-12">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold text-gray-900">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                   Sloth Sanctuary 🦥
                 </h2>
                 <button
                   onClick={() =>
                     (window.location.href = '/search?category=sloths')
                   }
-                  className="text-red-600 hover:text-red-700 font-medium transition-colors"
+                  className="text-red-600 dark:text-red-500 hover:text-red-700 dark:hover:text-red-400 font-medium transition-colors"
                 >
                   View All Sloths →
                 </button>
@@ -184,10 +184,10 @@ export default function HomePage() {
             {featuredVideos.length === 0 && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🐕</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
                   No featured videos found
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Check back later for more adorable pet content!
                 </p>
               </div>
