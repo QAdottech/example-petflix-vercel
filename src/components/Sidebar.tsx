@@ -14,7 +14,7 @@ export default function Sidebar() {
   ]
 
   return (
-    <aside className="w-64 bg-white dark:bg-slate-800 shadow-sm border-r border-gray-200 dark:border-gray-700 min-h-screen">
+    <aside className="w-64 bg-background shadow-sm border-r border-gray-200 dark:border-gray-700 min-h-screen">
       <div className="p-4">
         <nav className="space-y-2">
           {navItems.map((item) => {
@@ -39,7 +39,7 @@ export default function Sidebar() {
         </nav>
 
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
+          <h3 className="text-sm font-semibold text-foreground mb-3">
             Categories
           </h3>
           <div className="space-y-1">
@@ -48,7 +48,7 @@ export default function Sidebar() {
                 <Link
                   key={category}
                   href={`/search?category=${category.toLowerCase()}`}
-                  className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-500 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                  className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-500 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   {category}
                 </Link>

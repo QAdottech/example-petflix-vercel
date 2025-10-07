@@ -17,15 +17,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true)
+
     // Check localStorage for saved theme preference
     const savedTheme = localStorage.getItem('theme') as Theme | null
     if (savedTheme) {
       setTheme(savedTheme)
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
     } else {
       // Check system preference
       const prefersDark = window.matchMedia(
@@ -33,32 +29,27 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       ).matches
       const initialTheme = prefersDark ? 'dark' : 'light'
       setTheme(initialTheme)
-      if (prefersDark) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
     }
   }, [])
 
   useEffect(() => {
+    if (!mounted) return
+
     // Update the class whenever theme changes
+    console.log('Theme changed to:', theme)
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
+      console.log('Added dark class to document element')
     } else {
       document.documentElement.classList.remove('dark')
+      console.log('Removed dark class from document element')
     }
-  }, [theme])
+  }, [theme, mounted])
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
-  }
-
-  // Prevent flash of wrong theme
-  if (!mounted) {
-    return <>{children}</>
   }
 
   return (
