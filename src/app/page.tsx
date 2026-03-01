@@ -2,20 +2,32 @@
 
 import { useState, useEffect } from 'react'
 import { Video } from '@/types/video'
-import { getFeaturedVideos } from '@/utils/videoUtils'
+import {
+  getFeaturedVideos,
+  filterVideosByCategory,
+  filterVideosByCategoryWithSlothDelay,
+} from '@/utils/videoUtils'
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import VideoCard from '@/components/VideoCard'
+import SlothLoading from '@/components/SlothLoading'
 
 export default function HomePage() {
   const [featuredVideos, setFeaturedVideos] = useState<Video[]>([])
+  const [reptileVideos, setReptileVideos] = useState<Video[]>([])
+  const [slothVideos, setSlothVideos] = useState<Video[]>([])
   const [loading, setLoading] = useState(true)
+  const [slothLoading, setSlothLoading] = useState(false)
 
   useEffect(() => {
     const loadVideos = async () => {
       try {
-        const videos = await getFeaturedVideos()
-        setFeaturedVideos(videos)
+        const [featuredVids, reptileVids] = await Promise.all([
+          getFeaturedVideos(),
+          filterVideosByCategory('reptiles'),
+        ])
+        setFeaturedVideos(featuredVids)
+        setReptileVideos(reptileVids)
       } catch (error) {
         console.error('Error loading videos:', error)
       } finally {
@@ -23,7 +35,20 @@ export default function HomePage() {
       }
     }
 
+    const loadSlothVideos = async () => {
+      try {
+        setSlothLoading(true)
+        const slothVids = await filterVideosByCategoryWithSlothDelay('sloths')
+        setSlothVideos(slothVids)
+      } catch (error) {
+        console.error('Error loading sloth videos:', error)
+      } finally {
+        setSlothLoading(false)
+      }
+    }
+
     loadVideos()
+    loadSlothVideos()
   }, [])
 
   const handleSearch = (query: string) => {
@@ -70,7 +95,7 @@ export default function HomePage() {
               your day!
             </p>
 
-            <section>
+            <section className="mb-12">
               <h2 className="text-2xl font-semibold text-gray-900 mb-6">
                 Featured Videos
               </h2>
@@ -79,6 +104,54 @@ export default function HomePage() {
                   <VideoCard key={video.id} video={video} />
                 ))}
               </div>
+            </section>
+
+            {reptileVideos.length > 0 && (
+              <section className="mb-12">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-semibold text-gray-900">
+                    Reptile Adventures 🦎
+                  </h2>
+                  <button
+                    onClick={() =>
+                      (window.location.href = '/search?category=reptiles')
+                    }
+                    className="text-red-600 hover:text-red-700 font-medium transition-colors"
+                  >
+                    View All Reptiles →
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {reptileVideos.slice(0, 4).map((video) => (
+                    <VideoCard key={video.id} video={video} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="mb-12">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  Sloth Sanctuary 🦥
+                </h2>
+                <button
+                  onClick={() =>
+                    (window.location.href = '/search?category=sloths')
+                  }
+                  className="text-red-600 hover:text-red-700 font-medium transition-colors"
+                >
+                  View All Sloths →
+                </button>
+              </div>
+              {slothLoading ? (
+                <SlothLoading message="Loading sloth videos..." />
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {slothVideos.slice(0, 4).map((video) => (
+                    <VideoCard key={video.id} video={video} />
+                  ))}
+                </div>
+              )}
             </section>
 
             {featuredVideos.length === 0 && (
